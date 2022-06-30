@@ -1,0 +1,37 @@
+﻿|[[Company]]|
+  Axeptia
+|[[GUID]]|
+  cbf8a25f-11b5-4a9b-b985-c50c37f5185a
+|[[ConnectionString]]|
+Server=BOOK2-JF;Database=CustomerManagement;User Id=jan;Password=jan;MultipleActiveResultSets=true
+|[[Sql]]|
+SELECT TOP (1000) [id]
+      ,[publicIdentifier]
+      ,[uniqueId]
+      ,[name]
+      ,[address]
+      ,[zipCode]
+      ,[city]
+      ,[countryCodeAlpha2]
+      ,[created]
+      ,[updated]
+      ,[deleted]
+  FROM [dbo].[Customers]
+  WHERE created >= @startFrom
+
+  |[[RunFrom]]|
+  2020-06-24T01:01:00.000|DateTime
+
+  |[[RunFromUpdateByColumn]]|
+  created
+  |[[BlobStorageUrl]]|
+  https://integ08a7290bru3hd01prod.blob.core.windows.net
+  |[[BlobContainer]]|
+  blob-container
+  |[[BlobSasToken]]|
+  ljaødsflkjøleakjlrfjkadslfkjøljaøejlfjaldsfjkaoijojaoefjlkj98797qw3rjladjf
+    |[[ExchangeSasTokenCode]]|
+  360e6080-3cf6-48c0-b159-9263288524b1
+  |[[MaxRecordsInBatch]]|
+  1000
+  |[[End]]|
