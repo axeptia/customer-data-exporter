@@ -15,14 +15,14 @@ To use the program you must start it with a parameter. To have it list available
 Here are some valid parameters:
 
 | Parameter | Description                              |
-|-----------|------------------------------------------|
+| --------- | ---------------------------------------- |
 | --version | Write the program version to the console |
 | --run     | Start the program                        |
 
 `--run` parameter needs one of the following values:
 
 | Value | Description                                                                                                              |
-|-------|--------------------------------------------------------------------------------------------------------------------------|
+| ----- | ------------------------------------------------------------------------------------------------------------------------ |
 | hello | Will just write hello to the console                                                                                     |
 | test  | Will get 100 records (unless another limit is specified in the SQL) from the SQL set in config file and store it to file |
 | real  | Will run the program                                                                                                     |
@@ -39,7 +39,7 @@ Check the version of the program:
 
 ## Where to find the exported data
 
-Important: If you run with the "real" parameter value set, then the files will only be stored in the system for a short period, until it's been uploaded to Axeptia. Run with test parameter, to prevent automatic uploading of files to Axeptia.
+Important: If you run it with `--run real`, then the files will only be stored in the system for a short period, until it's been uploaded to Axeptia. Use `--run test` to prevent automatic uploading of files to Axeptia.
 
 The job exports files to the `data` directory located where the program is located.
 
@@ -51,15 +51,23 @@ The log files are located in the `log` directory located where the program is lo
 
 **You kan skip this part if you are not informed by Axeptia to do this**.
 
-If you need to deliver multiple files, but the configuration to retrieve the data is mostly the same, you add config files for each file in the `configs` child directory of the program location.
+If you need to deliver multiple files, and the configuration to retrieve the data is mostly the same, you can add config files for each file in the `configs` child directory of the program location.
 
-Those config files only contain the sections that should be different for each export.
+Those config files should only contain the specific sections that differ for each export.
 
-Sections found in config files here will override info found in `axeptiaExportConfig.txt` (located in program folder). The program will run one export for each file ending with `_config.txt` that is found in the `configs` directory. 
+Sections defined in these config files will override corresponding sections in `axeptiaExportConfig.txt` (located in program folder). The program will run one export for each file ending with `_config.txt` that is found in the `configs` directory.
+
+Example of filenames for _config files:
+
+`division1_config.txt`
+
+`division2_config.txt`
+
+`sale_dep_config.txt`
 
 ## Database Providers
 
-In the configuration file, you need to set the Connection String that can access the database. Here are some samples:
+In the configuration file, you need to set the connection string that can access the database. Here are some examples:
 
 ### MSSQL
 
@@ -77,11 +85,11 @@ Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
 
 ##### More samples
 
-Use [this Link](https://www.connectionstrings.com/sql-server/) to find more ConnectionString samples
+Use [this Link](https://www.connectionstrings.com/sql-server/) to find more connection string samples
 
 ## Description of the axeptiaExportConfig.txt
 
-This file is just a sample, you must have you own configuration to have it work.
+The content of this file is just sample settings and must be replaced with your own settings.
 
 ```
 |[[Company]]|
@@ -97,8 +105,8 @@ f2cd5917-973a-41cc-99cd-2f7050336c91
 Server=local-server;Database=Transaction;User Id=myId;Password=myPwd;MultipleActiveResultSets=true
 
 |[[Sql]]|
-/*** 
-Sql to use when retrieving records from Database that should be sent to Axeptia. 
+/***
+Sql to retrieve records that should be sent to Axeptia.
 It must contain the @runFrom parameter, which is used to restrict the number of records that should be exported.
 @runFrom parameter is set in RunFrom section in this file
 ***/
@@ -115,53 +123,53 @@ SELECT [id]
   WHERE created >= CAST(@runFrom AS datetime)
 
 |[[RunFrom]]|
-/*** 
-A value that is Date or Number, which is used in the SQL to prevent full export everytime. The value here will be updated when the job is finished.
+/***
+A value, Date or Number, which is used in the SQL to prevent full export everytime. The value here will be updated when the job is finished.
 Value is then set to the newest (Date) or highest (Number) found in the column specified in the RunFromUpdateByColumn section.
-Samples: 
+Samples:
 Use of Date: 2020-01-21T14:10:00.000|DateTime
 Use of Number: 2010|Number (this could also be a date, etc 20101225010510)
 ***/
 2020-01-21T14:10:00.000|DateTime
 
 |[[RunFromUpdateByColumn]]|
-/*** 
-Name of the colum that should be used when setting the new value in RunFrom section. This column must be part of the selected fields in the SQL 
+/***
+Name of the colum that should be used when setting the new value in RunFrom section. This column must be part of the selected fields in the SQL
 ***/
 created
 
 |[[BlobStorageUrl]]|
-/*** 
-URL of the the blobstorage where the file is uploaded to. This value is retrieved from Axeptia. 
+/***
+URL of the the blob storage where the file is uploaded to. This value is retrieved from Axeptia.
 ***/
 https://dexeg878adfgasdiolk.blob.core.windows.net
 
 |[[BlobContainer]]|
-/*** 
-Name of the the container where the file is uploaded to. This value is retrieved from Axeptia. 
+/***
+Name of the the container where the file is uploaded to. This value is retrieved from Axeptia.
 ***/
 axeptia
 
 |[[BlobSasToken]]|
-/*** 
-DEPRICATED, uses ExchangeSasTokenCode instead
-Token who must be used to have access to the blob storage. This value is retrieved from Axeptia. 
+/***
+DEPRECATED, uses ExchangeSasTokenCode instead
+Token which must be used to have access to the blob storage. This value is retrieved from Axeptia.
 ***/
 sv=2019-04-01&si=d-345NE&sr=c&sig=HcO5IGgUhaw%6h7lekOPvCi9cgfDknipOmoBSp6TxRP0UaY%34
 
 |[[ExchangeSasTokenCode]]|
-/*** 
-Guid that is used to exchange to a valid SAS Token, used when uploading files to Axeptia. This value is retrieved from Axeptia. 
+/***
+Guid that is used to exchange to a valid SAS Token, used when uploading files to Axeptia. This value is retrieved from Axeptia.
 ***/
 00930dee-11e2-4be8-a7e0-6832ee3ad075
 
 |[[MaxRecordsInBatch]]|
-/*** 
+/***
 How many records each file should contain. Default 1000
 ***/
 1000
 
 |[[End]]|
-/*** Just mark the end of the file ***/
+/*** Just marks the end of the file ***/
 END
 ```
