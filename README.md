@@ -4,7 +4,7 @@ The motivation behind this project is to let customers of Axeptia have a way to 
 
 If you just want to download the program you find it here:
 
-[Win64 self-contained exe (in a zip file)](https://github.com/axeptia/customer-data-exporter/releases/download/v1.0.0/AxeptiaExporter.ConsoleApp_Win_x64.zip)
+[Win64 self-contained exe (in a zip file)](https://github.com/axeptia/customer-data-exporter/releases/download/v1.0.1/AxeptiaExporter.ConsoleApp_Win_x64.zip)
 
 ## Getting started
 
