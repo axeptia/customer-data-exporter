@@ -100,6 +100,11 @@ axeptia
 /*** This value is something you must get from Axeptia. ***/
 f2cd5917-973a-41cc-99cd-2f7050336c91
 
+|[[Filename]]|
+/*** The name without extention of the file that will be uploaded to Axeptia. 
+Can be used when unique filename is needed between different config files. ***/
+f2cd5917-973a-41cc-99cd-2f7050336c91_division1
+
 |[[ConnectionString]]|
 /*** A valid connection string that is used to connect to the database. Readme file points to sites with samples ***/
 Server=local-server;Database=Transaction;User Id=myId;Password=myPwd;MultipleActiveResultSets=true
